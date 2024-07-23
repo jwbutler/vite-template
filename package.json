@@ -5,16 +5,25 @@
   "type": "module",
   "description": "A Vite + TypeScript template, intended for easy project scaffolding",
   "scripts": {
-    "dev": "vite",
+    "run:client": "vite -c client/vite.config.ts",
+    "run:server": "node --experimental-specifier-resolution=node --loader ts-node/esm ./server/src/main.ts",
+    "generate:zod": "ts-to-zod server/src/types.ts server/src/gen-zod/types.ts",
     "build": "tsc && vite build",
-    "lint": "eslint src/**/*.ts",
-    "lint:fix": "eslint --fix src/**/*.ts",
+    "lint": "eslint {client,server}/src/**/*.ts",
+    "lint:fix": "eslint --fix {client,server}/src/**/*.ts",
     "preview": "vite preview",
     "test": "vitest"
   },
+  "dependencies": {
+    "@trpc/client": "^11.0.0-rc.467",
+    "@trpc/server": "^11.0.0-rc.467",
+    "cors": "^2.8.5",
+    "ts-node": "^10.9.2",
+    "ts-to-zod": "^3.9.1"
+  },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/node": "^20.12.4",
-    "@types/pathfinding": "^0.0.9",
     "@typescript-eslint/eslint-plugin": "^7.5.0",
     "@typescript-eslint/parser": "^7.5.0",
     "eslint": "^8.57.0",
